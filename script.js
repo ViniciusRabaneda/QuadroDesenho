@@ -4,7 +4,8 @@ let canDraw =false;
 let mouseX = 0;
 let mouseY=0;
 let screen = document.querySelector('#tela');
-let ctx = screen.getContext('2d');
+let ctx = screen.getContext('2d'); //get the rendering context of an element
+
 
 
 //  Events
@@ -16,7 +17,7 @@ screen.addEventListener('mousedown', mouseDownEvent);
 screen.addEventListener('mousemove', mouseMoveEvent);
 screen.addEventListener('mouseup', mouseUpEvent);
 document.querySelector('.clear').addEventListener('click',clearScreen);
-//events
+//Functions
 function colorClickEvent(e){
     let color= e.target.getAttribute('data-color');
     currentColor = color;
@@ -45,17 +46,18 @@ function draw(x,y){
     let pointX = x - screen.offsetLeft;
     let pointY = y - screen.offsetTop;
 
-    ctx.beginPath();
-    ctx.lineWidth = 5;
-    ctx.lineJoin = "round";
-    ctx.moveTo(mouseX, mouseY);
-    ctx.lineTo(pointX,pointY);
-    ctx.closePath();
-    ctx.strokeStyle = currentColor;
-    ctx.stroke();
+    ctx.beginPath(); // start drawing
+    ctx.lineWidth = 5; 
+    ctx.lineJoin = "round"; // point style 
+    ctx.moveTo(mouseX, mouseY); // initial position
+    ctx.lineTo(pointX,pointY); // final position
+    ctx.closePath(); // stop drawing
+    ctx.strokeStyle = currentColor; // get the initially selected color
+    ctx.stroke(); // fill with the selected color
 
-    mouseX = pointX;
-    mouseY = pointY;
+    mouseX = pointX; //the starting point becomes the ending point (global variable)
+
+    mouseY = pointY; //the starting point becomes the ending point(global variable)
 }
 
 function clearScreen(){
